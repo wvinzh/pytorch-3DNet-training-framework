@@ -1,0 +1,9 @@
+#trained models
+trained_models
+
+#unused files
+*.txt
+*.pkl
+*.pyc
+__pycache__
+.vscode
