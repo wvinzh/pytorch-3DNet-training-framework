@@ -61,18 +61,19 @@ def extract_names(label_root,file_name):
     return names,result
 
 def scan_zip(root_path,label_txt,out_root):
-    zipfile_list = glob.glob(pathname=os.path.join(root_path,'*.zip'))
+    zipfile_list = glob.glob(pathname=os.path.join(root_path,'*20180820.zip'))
     zipfile_list.sort(reverse=True)
     print(zipfile_list)
     origin_file = open(label_txt,'r')
     origin_lines = origin_file.readlines()
     # target_lines = ['0']*len(origin_lines)
-    target_file = open('new_test.txt','w')
+    target_file = open('new_test_0926.txt','w')
     for one_zip in zipfile_list:
         print('scan zip file: %s'% one_zip)
         zf = zipfile.ZipFile(one_zip)
         for mp4_file in zf.namelist():
             if not mp4_file.endswith('mp4'):
+                print('Not mp4 File %s' % mp4_file)
                 continue
             origin_name = mp4_file.split('/')[1]
             target_name = mp4_file
@@ -81,6 +82,8 @@ def scan_zip(root_path,label_txt,out_root):
                     target_file.write(origin_line.replace(origin_name,target_name))
                     origin_lines.remove(origin_line)
                     break
+            # print('no file named %s' % origin_name)
+                    
     # target_file.writelines(origin_lines)
     origin_file.flush()
     origin_file.close()
@@ -89,5 +92,5 @@ def scan_zip(root_path,label_txt,out_root):
 
 
 
-extract_names('/home/zengh/AiChallenger/Video-Classification-Pytorch-FrameWork/','new_test.txt')
-# scan_zip('/home/zengh/Dataset/AIChallenger/test','/home/zengh/Dataset/AIChallenger/short_video_validationset_annotations.txt.0829','')
+# extract_names('/home/zengh/AiChallenger/Video-Classification-Pytorch-FrameWork/','new_test.txt')
+scan_zip('/home/zengh/Dataset/AIChallenger/','/home/zengh/Dataset/AIChallenger/short_video_validationset_annotations.txt','')

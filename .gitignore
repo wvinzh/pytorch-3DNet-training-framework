@@ -1,9 +1,10 @@
 #trained models
 trained_models
-
+videos
 #unused files
 *.txt
 *.pkl
 *.pyc
 __pycache__
 .vscode
+*.log

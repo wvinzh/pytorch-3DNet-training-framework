@@ -200,6 +200,7 @@ def generate_model(opt):
             model.module.fc = nn.Linear(model.module.fc.in_features,
                                             opt.n_finetune_classes).cuda()
             parameters = get_fine_tuning_parameters(model, opt.ft_begin_index)
+            # del pretrain
             return model, parameters
     else:
         if opt.pretrain_path:
